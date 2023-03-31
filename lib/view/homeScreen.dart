@@ -3,6 +3,7 @@ import 'package:pockey/view/analyze.dart';
 import 'package:pockey/view/dashboard.dart';
 import 'package:pockey/view/profile.dart';
 import 'package:pockey/view/search.dart';
+import 'package:neubrutalism_ui/neubrutalism_ui.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,6 +15,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
+  bool press = false;
   int currentTab = 0;
   final List<String> screens = [
     "Home",
@@ -48,7 +50,7 @@ class _HomePageState extends State<HomePage>
               height: 3,
             ),
           ),
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.amber[50],
           centerTitle: true,
           leading: IconButton(
             onPressed: () {},
@@ -69,12 +71,27 @@ class _HomePageState extends State<HomePage>
             )
           ]),
       body: PageStorage(bucket: bucket, child: currentScreen),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () {},
-      ),
+      floatingActionButton: Neubrutalism.neuIconButton(
+          icon: Icon(Icons.add),
+          buttonHeight: 60,
+          buttonWidth: 60,
+          borderWidth: 1,
+          onPressed: () {
+            setState(() {
+              if (press) {
+                press = false;
+              } else if (!press) {
+                press = true;
+              }
+            });
+          },
+          shadowBlurRadius: press == false ? 0 : 3,
+          borderRadius: BorderRadius.circular(70),
+          buttonColor: Colors.blue,
+          paddingData: const EdgeInsets.all(10)),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
+        color: Colors.amber[50],
         shape: CircularNotchedRectangle(),
         notchMargin: 10,
         child: Container(

@@ -16,7 +16,7 @@ class _DashBoardState extends State<DashBoard> {
     return Scaffold(
       backgroundColor: Colors.amber[50],
       body: Container(
-        padding: const EdgeInsets.only(left: 10, top: 20, right: 5),
+        padding: const EdgeInsets.only(left: 5, top: 10, right: 5),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -132,6 +132,47 @@ class _DashBoardState extends State<DashBoard> {
             ),
             SizedBox(height: 20),
             Container(
+              height: 65,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(3),
+                  border: Border.all(
+                    color: Colors.black,
+                    width: 1,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black,
+                      blurRadius: 0,
+                      offset: Offset(4, 4),
+                    ),
+                  ],
+                  color: Colors.green),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 5, right: 8, bottom: 2),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      " Add a Goal",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
+                    ),
+                    Neubrutalism.neuIconButton(
+                        icon: Icon(Icons.plus_one),
+                        buttonHeight: 50,
+                        buttonWidth: 50,
+                        borderWidth: 1,
+                        onPressed: () {},
+                        borderRadius: BorderRadius.all(Radius.circular(50)),
+                        buttonColor: Colors.redAccent,
+                        paddingData: const EdgeInsets.all(1))
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: 10),
+            Container(
               height: 40,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
@@ -172,6 +213,122 @@ class _DashBoardState extends State<DashBoard> {
                     // changes the state of the switch
                     onChanged: (value) => setState(() => press = value),
                   )
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              height: MediaQuery.of(context).size.height / 4,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(3),
+                  border: Border.all(
+                    color: Colors.black,
+                    width: 1,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black,
+                      blurRadius: 0,
+                      offset: Offset(4, 4),
+                    ),
+                  ],
+                  color: Colors.white),
+              child: ListView(
+                scrollDirection: Axis.vertical,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Food",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 25),
+                        ),
+                        Text(
+                          "-₹4500",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w800, fontSize: 22),
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Travel",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 25),
+                        ),
+                        Text(
+                          "-₹4500",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w800, fontSize: 22),
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Loan",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 25),
+                        ),
+                        Text(
+                          "-₹6500",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w800, fontSize: 22),
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Grocery",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 25),
+                        ),
+                        Text(
+                          "-₹450",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w800, fontSize: 22),
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Miscellaneous",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 25),
+                        ),
+                        Text(
+                          "-₹450",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w800, fontSize: 22),
+                        )
+                      ],
+                    ),
+                  ),
                 ],
               ),
             )

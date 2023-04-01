@@ -41,8 +41,8 @@ class _TileState extends State<Tile> {
             color: widget.tileColor,
           ),
           padding: const EdgeInsets.only(
-            left: 16,
-            right: 15,
+            left: 13,
+            right: 12,
             top: 17,
             bottom: 18,
           ),

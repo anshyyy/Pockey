@@ -23,6 +23,7 @@ class _HomePageState extends State<HomePage>
     "Search",
     "Profile",
   ];
+
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreen = Analyze();
 
@@ -83,6 +84,167 @@ class _HomePageState extends State<HomePage>
               } else if (!press) {
                 press = true;
               }
+              showModalBottomSheet(
+                  backgroundColor: Colors.amber[100],
+                  context: context,
+                  builder: (BuildContext context) {
+                    return SizedBox(
+                        height: 400,
+                        child: Padding(
+                          padding: const EdgeInsets.all(5),
+                          child: Container(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Center(
+                                  child: Text("Add the Expense",
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold)),
+                                ),
+                                const SizedBox(height: 10),
+                                Row(
+                                  children: [
+                                    const Text(
+                                      "Amount",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w800),
+                                    ),
+                                    SizedBox(width: 10),
+                                    Expanded(
+                                        child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(
+                                          height: 50,
+                                          child: TextField(
+                                            style:
+                                                TextStyle(color: Colors.black),
+                                            decoration: InputDecoration(
+                                              filled: true,
+                                              fillColor: Colors.white,
+                                              hintText: "Expense",
+                                              hintStyle: TextStyle(
+                                                color: Colors.grey,
+                                              ),
+                                              enabledBorder:
+                                                  const OutlineInputBorder(
+                                                borderSide: const BorderSide(
+                                                    color: Colors.black,
+                                                    width: 2.0),
+                                              ),
+                                              border: OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(1.0),
+                                                ),
+                                                borderSide: BorderSide(
+                                                    style: BorderStyle.none,
+                                                    width: 5,
+                                                    color: Colors.black),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 5),
+                                        Text(
+                                            "  Enter the amount that you have spent",
+                                            style: TextStyle(
+                                                color: Colors.black54))
+                                      ],
+                                    ))
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: [
+                                    const Text(
+                                      "Description",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w800),
+                                    ),
+                                    SizedBox(width: 10),
+                                    Expanded(
+                                        child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(
+                                          height: 50,
+                                          child: TextField(
+                                            style:
+                                                TextStyle(color: Colors.black),
+                                            decoration: InputDecoration(
+                                              filled: true,
+                                              fillColor: Colors.white,
+                                              hintText: "Description",
+                                              hintStyle: TextStyle(
+                                                color: Colors.grey,
+                                              ),
+                                              enabledBorder:
+                                                  const OutlineInputBorder(
+                                                borderSide: const BorderSide(
+                                                    color: Colors.black,
+                                                    width: 2.0),
+                                              ),
+                                              border: OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(1.0),
+                                                ),
+                                                borderSide: BorderSide(
+                                                    style: BorderStyle.none,
+                                                    width: 5,
+                                                    color: Colors.black),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 5),
+                                        Text(
+                                          "  Some description about your expense",
+                                          style:
+                                              TextStyle(color: Colors.black54),
+                                        ),
+                                      ],
+                                    ))
+                                  ],
+                                ),
+                                Text(
+                                  "Categories :",
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Column(
+                                  children: [
+                                    ListView.builder(
+                                        scrollDirection: Axis.horizontal,
+                                        shrinkWrap: true,
+                                        itemCount: 3,
+                                        itemBuilder: (context, index) {
+                                          return NeuTextButton(
+                                              Text("Hello"),
+                                              Colors.red,
+                                              50,
+                                              100,
+                                              Colors.black,
+                                              Colors.black,
+                                              1,
+                                              () {});
+                                        }),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        ));
+                  });
+              press = false;
             });
           },
           shadowBlurRadius: press == false ? 0 : 3,

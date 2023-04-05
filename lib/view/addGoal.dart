@@ -28,6 +28,7 @@ class _AddGoalState extends State<AddGoal> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: true,
         backgroundColor: Colors.amber[100],
         appBar: AppBar(
           iconTheme: IconThemeData(

@@ -16,6 +16,7 @@ class _DashBoardState extends State<DashBoard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.amber[100],
       body: Container(
         padding: const EdgeInsets.only(left: 5, top: 10, right: 5),

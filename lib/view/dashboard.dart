@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:neubrutalism_ui/neubrutalism_ui.dart';
+import 'package:pockey/view/addGoal.dart';
 import 'package:pockey/widget/tile.dart';
 
 class DashBoard extends StatefulWidget {
-  const DashBoard({super.key});
+  List<String> categories;
+  DashBoard({super.key, required this.categories});
 
   @override
   State<DashBoard> createState() => _DashBoardState();
@@ -163,7 +165,12 @@ class _DashBoardState extends State<DashBoard> {
                         buttonHeight: 50,
                         buttonWidth: 50,
                         borderWidth: 1,
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => AddGoal(
+                                    categories: widget.categories,
+                                  )));
+                        },
                         borderRadius: BorderRadius.all(Radius.circular(50)),
                         buttonColor: Colors.redAccent,
                         paddingData: const EdgeInsets.all(1))
@@ -172,55 +179,11 @@ class _DashBoardState extends State<DashBoard> {
               ),
             ),
             SizedBox(height: 10),
-            Container(
-              height: 40,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(3),
-                  border: Border.all(
-                    color: Colors.black,
-                    width: 1,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black,
-                      blurRadius: 0,
-                      offset: Offset(4, 4),
-                    ),
-                  ],
-                  color: Colors.white),
-              padding: const EdgeInsets.only(
-                left: 19,
-                right: 15,
-                top: 10,
-                bottom: 10,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Recent Transactions",
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                  ),
-                  Switch(
-                    activeColor: Colors.amber,
-                    activeTrackColor: Colors.blueAccent,
-                    inactiveThumbColor: Colors.blueGrey.shade600,
-                    inactiveTrackColor: Colors.grey.shade400,
-                    splashRadius: 50.0,
-                    // boolean variable value
-                    value: press,
-                    // changes the state of the switch
-                    onChanged: (value) => setState(() => press = value),
-                  )
-                ],
-              ),
-            ),
             SizedBox(
               height: 10,
             ),
             Container(
-              height: MediaQuery.of(context).size.height / 4,
+              height: MediaQuery.of(context).size.height / 3.4,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(3),
@@ -235,99 +198,121 @@ class _DashBoardState extends State<DashBoard> {
                       offset: Offset(4, 4),
                     ),
                   ],
-                  color: Colors.white),
-              child: ListView(
-                scrollDirection: Axis.vertical,
+                  color: Colors.amber[50]),
+              child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Food",
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.amber,
+                          borderRadius: BorderRadius.circular(2),
+                          border: Border.all(color: Colors.black, width: 2)),
+                      child: Center(
+                        child: Text(
+                          "Recent Transactions",
+                          textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 25),
+                              fontSize: 20, fontWeight: FontWeight.bold),
                         ),
-                        Text(
-                          "-₹4500",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w800, fontSize: 22),
-                        )
-                      ],
+                      ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Travel",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 25),
+                  ListView(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Food",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 25),
+                            ),
+                            Text(
+                              "-₹4500",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w800, fontSize: 22),
+                            )
+                          ],
                         ),
-                        Text(
-                          "-₹4500",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w800, fontSize: 22),
-                        )
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Loan",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 25),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Travel",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 25),
+                            ),
+                            Text(
+                              "-₹4500",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w800, fontSize: 22),
+                            )
+                          ],
                         ),
-                        Text(
-                          "-₹6500",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w800, fontSize: 22),
-                        )
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Grocery",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 25),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Loan",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 25),
+                            ),
+                            Text(
+                              "-₹6500",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w800, fontSize: 22),
+                            )
+                          ],
                         ),
-                        Text(
-                          "-₹450",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w800, fontSize: 22),
-                        )
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Miscellaneous",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 25),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Grocery",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 25),
+                            ),
+                            Text(
+                              "-₹450",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w800, fontSize: 22),
+                            )
+                          ],
                         ),
-                        Text(
-                          "-₹450",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w800, fontSize: 22),
-                        )
-                      ],
-                    ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Miscellaneous",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 25),
+                            ),
+                            Text(
+                              "-₹450",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w800, fontSize: 22),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

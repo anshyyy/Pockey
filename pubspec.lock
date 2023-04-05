@@ -25,6 +25,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.1"
+  circular_motion:
+    dependency: "direct main"
+    description:
+      name: circular_motion
+      sha256: c10c3d2b4479475e5f415883578d44953a254706e663255fc8f9e040e54f7193
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.3"
   clock:
     dependency: transitive
     description:

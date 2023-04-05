@@ -35,6 +35,8 @@ class _HomePageState extends State<HomePage>
     "Movie",
     "Eating out",
     "Loan",
+    "Shopping",
+    "groceries"
   ];
 
   final PageStorageBucket bucket = PageStorageBucket();
@@ -518,7 +520,9 @@ class _HomePageState extends State<HomePage>
                     minWidth: 40,
                     onPressed: () {
                       setState(() {
-                        currentScreen = DashBoard();
+                        currentScreen = DashBoard(
+                          categories: categories,
+                        );
                         currentTab = 0;
                       });
                     },

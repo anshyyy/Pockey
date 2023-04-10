@@ -13,6 +13,28 @@ class DashBoard extends StatefulWidget {
 
 class _DashBoardState extends State<DashBoard> {
   bool press = false;
+  int selectedMonthIndex = -1;
+  List<String> months = [
+    "January",
+    "Febuary",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ];
+  @override
+  void dispose() {
+    // ignore: avoid_print
+    print('Dispose used');
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,8 +70,193 @@ class _DashBoardState extends State<DashBoard> {
                             fontSize: 23,
                             fontWeight: FontWeight.bold,
                             color: Colors.white),
-                      ),
-                      () {},
+                      ), () {
+                    showModalBottomSheet(
+                        isScrollControlled: true,
+                        backgroundColor: Colors.amber[100],
+                        context: context,
+                        builder: (BuildContext context) {
+                          return StatefulBuilder(builder:
+                              (BuildContext context, StateSetter mystate) {
+                            return Padding(
+                              padding: const EdgeInsets.all(5),
+                              child: SizedBox(
+                                height: MediaQuery.of(context).size.height / 2,
+                                child: Column(
+                                  children: [
+                                    Center(
+                                        child: Text("Add you Income",
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold))),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text("Amount",
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold)),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        Expanded(
+                                            child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                              height: 50,
+                                              child: TextField(
+                                                style: TextStyle(
+                                                    color: Colors.black),
+                                                decoration: InputDecoration(
+                                                  filled: true,
+                                                  fillColor: Colors.white,
+                                                  hintText: "Total Amount",
+                                                  hintStyle: TextStyle(
+                                                    color: Colors.grey,
+                                                  ),
+                                                  enabledBorder:
+                                                      const OutlineInputBorder(
+                                                    borderSide:
+                                                        const BorderSide(
+                                                            color: Colors.black,
+                                                            width: 2.0),
+                                                  ),
+                                                  border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                      Radius.circular(1.0),
+                                                    ),
+                                                    borderSide: BorderSide(
+                                                        style: BorderStyle.none,
+                                                        width: 5,
+                                                        color: Colors.black),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            const SizedBox(height: 5),
+                                            Text(
+                                              "  Enter this month Income or Pocket Money",
+                                              style: TextStyle(
+                                                  color: Colors.black54),
+                                            ),
+                                          ],
+                                        ))
+                                      ],
+                                    ),
+                                    const SizedBox(height: 20),
+                                    const Center(
+                                        child: Text("Select Month",
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w900))),
+                                    Column(
+                                      children: [
+                                        Container(
+                                          height: 60,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          padding: EdgeInsets.only(right: 2),
+                                          child: ListView.builder(
+                                              scrollDirection: Axis.horizontal,
+                                              shrinkWrap: true,
+                                              itemCount: months.length,
+                                              itemBuilder: (context, index) {
+                                                return Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(5.0),
+                                                  child: NeuTextButton(
+                                                      Text(
+                                                        (selectedMonthIndex !=
+                                                                index)
+                                                            ? months[index]
+                                                            : months[index] +
+                                                                ' 📌',
+                                                        style: TextStyle(
+                                                            fontSize: 13,
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w900),
+                                                      ),
+                                                      Colors
+                                                          .primaries[index + 2],
+                                                      50,
+                                                      150,
+                                                      Colors.black,
+                                                      Colors.black,
+                                                      1, () {
+                                                    mystate(() {
+                                                      selectedMonthIndex =
+                                                          index;
+                                                      print(selectedMonthIndex);
+                                                    });
+                                                  }),
+                                                );
+                                              }),
+                                        ),
+                                        SizedBox(height: 60),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            NeuTextButton(
+                                                const Text(
+                                                  "Cancel",
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 20),
+                                                ),
+                                                Colors.grey,
+                                                70,
+                                                MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    2.3,
+                                                Colors.black,
+                                                Colors.black,
+                                                1, () {
+                                              Navigator.of(context).pop();
+                                            }),
+                                            const SizedBox(width: 10),
+                                            NeuTextButton(
+                                                const Text(
+                                                  "Create",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 20),
+                                                ),
+                                                Colors.blueAccent,
+                                                70,
+                                                MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    2.3,
+                                                Colors.black,
+                                                Colors.black,
+                                                1, () {
+                                              Navigator.of(context).pop();
+                                            })
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          });
+                        });
+                  },
                       Colors.blueAccent,
                       Text(
                         "Income  >",

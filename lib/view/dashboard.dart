@@ -14,6 +14,8 @@ class DashBoard extends StatefulWidget {
 class _DashBoardState extends State<DashBoard> {
   bool press = false;
   int selectedMonthIndex = -1;
+  TextEditingController _incomeMoneyController = new TextEditingController();
+  String IncomeMoney = "10000";
   List<String> months = [
     "January",
     "Febuary",
@@ -28,6 +30,7 @@ class _DashBoardState extends State<DashBoard> {
     "November",
     "December"
   ];
+
   @override
   void dispose() {
     // ignore: avoid_print
@@ -64,7 +67,7 @@ class _DashBoardState extends State<DashBoard> {
                       Icon(Icons.account_balance_wallet),
                       50,
                       Text(
-                        "₹1,00,000",
+                        '₹' + IncomeMoney,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                             fontSize: 23,
@@ -79,10 +82,14 @@ class _DashBoardState extends State<DashBoard> {
                           return StatefulBuilder(builder:
                               (BuildContext context, StateSetter mystate) {
                             return Padding(
-                              padding: const EdgeInsets.all(5),
+                              padding: EdgeInsets.only(
+                                  bottom:
+                                      MediaQuery.of(context).viewInsets.bottom),
                               child: SizedBox(
                                 height: MediaQuery.of(context).size.height / 2,
                                 child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
                                   children: [
                                     Center(
                                         child: Text("Add you Income",
@@ -110,6 +117,8 @@ class _DashBoardState extends State<DashBoard> {
                                             SizedBox(
                                               height: 50,
                                               child: TextField(
+                                                controller:
+                                                    _incomeMoneyController,
                                                 style: TextStyle(
                                                     color: Colors.black),
                                                 decoration: InputDecoration(
@@ -228,7 +237,7 @@ class _DashBoardState extends State<DashBoard> {
                                             const SizedBox(width: 10),
                                             NeuTextButton(
                                                 const Text(
-                                                  "Create",
+                                                  "Done",
                                                   style: TextStyle(
                                                       color: Colors.white,
                                                       fontWeight:
@@ -244,6 +253,10 @@ class _DashBoardState extends State<DashBoard> {
                                                 Colors.black,
                                                 Colors.black,
                                                 1, () {
+                                              setState(() {
+                                                IncomeMoney =
+                                                    _incomeMoneyController.text;
+                                              });
                                               Navigator.of(context).pop();
                                             })
                                           ],

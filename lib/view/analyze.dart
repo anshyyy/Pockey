@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:pockey/view/search.dart';
+import 'package:pockey/widget/MonthlyBarGraph.dart';
 import 'package:pockey/widget/pieChart.dart';
 import '../widget/dashTile.dart';
 
@@ -72,7 +74,7 @@ class _AnalyzeState extends State<Analyze> with TickerProviderStateMixin {
                         children: [
                           PieChartt(),
                           const Text("HI2"),
-                          const Text('Hi3'),
+                          MonthlyBarGraph(),
                         ],
                       ))
                 ],

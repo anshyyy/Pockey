@@ -9,6 +9,7 @@ class PieChartt extends StatefulWidget {
 
 class _PieCharttState extends State<PieChartt> {
   int touchedIndex = -1;
+  int currentWeek = (((DateTime.now().day - 1) / 7) + 1).ceil();
   Map<String, int> percentageValueOfPieChart = {
     // this data will be fetched from Db
     "Movie": 35,
@@ -16,22 +17,56 @@ class _PieCharttState extends State<PieChartt> {
     "Grocery": 20,
     "Drinks": 25
   };
+  String getNumberSuffix(int number) {
+    if (number % 10 == 1 && number % 100 != 11) {
+      return 'st';
+    } else if (number % 10 == 2 && number % 100 != 12) {
+      return 'nd';
+    } else if (number % 10 == 3 && number % 100 != 13) {
+      return 'rd';
+    } else {
+      return 'th';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            for (int i = 0; i < percentageValueOfPieChart.length; i++)
-              _buildLegend(
-                  percentageValueOfPieChart.keys.elementAt(i),
-                  percentageValueOfPieChart.values.elementAt(i).toString() +
-                      '%',
-                  randomColors[i]),
-          ],
+        Container(
+          width: MediaQuery.of(context).size.width / 3.1,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  currentWeek.toString() +
+                      getNumberSuffix(currentWeek) +
+                      " Week",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w900),
+                ),
+              ),
+              Divider(
+                color: Colors.black,
+                thickness: 1,
+                indent: 0,
+                endIndent: 40,
+              ),
+              const SizedBox(height: 20),
+              for (int i = 0; i < percentageValueOfPieChart.length; i++)
+                _buildLegend(
+                    percentageValueOfPieChart.keys.elementAt(i),
+                    percentageValueOfPieChart.values.elementAt(i).toString() +
+                        '%',
+                    randomColors[i]),
+            ],
+          ),
         ),
         AspectRatio(
           aspectRatio: 0.9,
@@ -77,45 +112,6 @@ class _PieCharttState extends State<PieChartt> {
                     ),
                     titlePositionPercentageOffset: 0.55,
                   ),
-                // PieChartSectionData(
-                //   borderSide: BorderSide(color: Colors.black, width: 1),
-                //   value: 35,
-                //   color: Colors.green,
-                //   title: '35%',
-                //   radius: touchedIndex == 1 ? 70 : 60,
-                //   titleStyle: TextStyle(
-                //     fontSize: 16,
-                //     fontWeight: FontWeight.bold,
-                //     color: touchedIndex == 1 ? Colors.white : Colors.black,
-                //   ),
-                //   titlePositionPercentageOffset: 0.55,
-                // ),
-                // PieChartSectionData(
-                //   borderSide: BorderSide(color: Colors.black, width: 1),
-                //   value: 20,
-                //   color: Colors.orange,
-                //   title: '20%',
-                //   radius: touchedIndex == 2 ? 70 : 60,
-                //   titleStyle: TextStyle(
-                //     fontSize: 16,
-                //     fontWeight: FontWeight.bold,
-                //     color: touchedIndex == 2 ? Colors.white : Colors.black,
-                //   ),
-                //   titlePositionPercentageOffset: 0.55,
-                // ),
-                // PieChartSectionData(
-                //   borderSide: BorderSide(color: Colors.black, width: 1),
-                //   value: 20,
-                //   color: Colors.purple,
-                //   title: '20%',
-                //   radius: touchedIndex == 3 ? 70 : 60,
-                //   titleStyle: TextStyle(
-                //     fontSize: 16,
-                //     fontWeight: FontWeight.bold,
-                //     color: touchedIndex == 3 ? Colors.white : Colors.black,
-                //   ),
-                //   titlePositionPercentageOffset: 0.55,
-                // ),
               ],
             ),
           ),

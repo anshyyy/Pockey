@@ -1,10 +1,12 @@
 import 'dart:math';
 
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pockey/widget/barData.dart';
+import 'package:pockey/widget/constantRandomColor.dart';
 
 class MonthlyBarGraph extends StatefulWidget {
   const MonthlyBarGraph({super.key});
@@ -40,13 +42,20 @@ class _MonthlyBarGraphState extends State<MonthlyBarGraph> {
             BarChartData(
               minY: 0,
               maxY: monthlyExpense.reduce(max) + 500,
+              titlesData: FlTitlesData(bottomTitles: getBottomTitles),
               barGroups: myBarData.barData
                   .map((data) => BarChartGroupData(x: data.x, barRods: [
-                        BarChartRodData(toY: data.y),
+                        BarChartRodData(
+                            toY: data.y,
+                            color: Colors.black,
+                            width: 10,
+                            borderRadius: BorderRadius.circular(1)),
                       ]))
                   .toList(),
             ),
           )),
     );
   }
+
+  Widget getBottomTitles(double value, TitleMeta meta) {}
 }

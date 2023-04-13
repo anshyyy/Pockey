@@ -72,8 +72,25 @@ class _AnalyzeState extends State<Analyze> with TickerProviderStateMixin {
                       child: TabBarView(
                         controller: _tabController,
                         children: [
-                          PieChartt(),
-                          const Text("HI2"),
+                          PieChartt(
+                            percentageValueOfPieChart: {
+                              "Movie": 35,
+                              "Food": 20,
+                              "Grocery": 20,
+                              "Drinks": 25
+                            },
+                            isWeek: true,
+                          ),
+                          PieChartt(
+                            percentageValueOfPieChart: {
+                              "Movie": 10,
+                              "Food": 5,
+                              "Grocery": 20,
+                              "Drinks": 5,
+                              "Shopping": 60
+                            },
+                            isWeek: false,
+                          ),
                           MonthlyBarGraph(),
                         ],
                       ))

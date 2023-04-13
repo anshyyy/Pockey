@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:pockey/widget/constantRandomColor.dart';
+import 'package:intl/intl.dart';
 
 class PieChartt extends StatefulWidget {
+  bool isWeek;
+  Map<String, int> percentageValueOfPieChart;
+
+  PieChartt({required this.isWeek, required this.percentageValueOfPieChart});
   @override
   _PieCharttState createState() => _PieCharttState();
 }
@@ -10,13 +15,9 @@ class PieChartt extends StatefulWidget {
 class _PieCharttState extends State<PieChartt> {
   int touchedIndex = -1;
   int currentWeek = (((DateTime.now().day - 1) / 7) + 1).ceil();
-  Map<String, int> percentageValueOfPieChart = {
-    // this data will be fetched from Db
-    "Movie": 35,
-    "Food": 20,
-    "Grocery": 20,
-    "Drinks": 25
-  };
+  String month = DateFormat.yMMMM().format(DateTime.now());
+  String year = DateFormat.yMMMM().format(DateTime.now());
+
   String getNumberSuffix(int number) {
     if (number % 10 == 1 && number % 100 != 11) {
       return 'st';
@@ -41,17 +42,24 @@ class _PieCharttState extends State<PieChartt> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  currentWeek.toString() +
-                      getNumberSuffix(currentWeek) +
-                      " Week",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w900),
-                ),
-              ),
+                  alignment: Alignment.topLeft,
+                  child: widget.isWeek
+                      ? Text(
+                          currentWeek.toString() +
+                              getNumberSuffix(currentWeek) +
+                              " Week",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w900),
+                        )
+                      : Text(
+                          month,
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w900),
+                        )),
               Divider(
                 color: Colors.black,
                 thickness: 1,
@@ -59,10 +67,12 @@ class _PieCharttState extends State<PieChartt> {
                 endIndent: 40,
               ),
               const SizedBox(height: 20),
-              for (int i = 0; i < percentageValueOfPieChart.length; i++)
+              for (int i = 0; i < widget.percentageValueOfPieChart.length; i++)
                 _buildLegend(
-                    percentageValueOfPieChart.keys.elementAt(i),
-                    percentageValueOfPieChart.values.elementAt(i).toString() +
+                    widget.percentageValueOfPieChart.keys.elementAt(i),
+                    widget.percentageValueOfPieChart.values
+                            .elementAt(i)
+                            .toString() +
                         '%',
                     randomColors[i]),
             ],
@@ -93,14 +103,16 @@ class _PieCharttState extends State<PieChartt> {
               sectionsSpace: 0,
               centerSpaceRadius: 40,
               sections: [
-                for (int i = 0; i < percentageValueOfPieChart.length; i++)
+                for (int i = 0;
+                    i < widget.percentageValueOfPieChart.length;
+                    i++)
                   PieChartSectionData(
                     borderSide: BorderSide(color: Colors.black, width: 1),
-                    value: percentageValueOfPieChart.values
+                    value: widget.percentageValueOfPieChart.values
                         .elementAt(i)
                         .toDouble(),
                     color: randomColors[i],
-                    title: percentageValueOfPieChart.values
+                    title: widget.percentageValueOfPieChart.values
                             .elementAt(i)
                             .toString() +
                         '%',

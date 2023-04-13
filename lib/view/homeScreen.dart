@@ -520,7 +520,7 @@ class _HomePageState extends State<HomePage>
           paddingData: const EdgeInsets.all(10)),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
-        color: Colors.amber[50],
+        color: Colors.amber[100],
         shape: CircularNotchedRectangle(),
         notchMargin: 10,
         child: Container(

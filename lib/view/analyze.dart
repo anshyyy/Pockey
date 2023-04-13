@@ -29,7 +29,7 @@ class _AnalyzeState extends State<Analyze> with TickerProviderStateMixin {
             ),
             const SizedBox(height: 10),
             Text("  DashBoard",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900)),
             const SizedBox(height: 10),
             Container(
               padding: const EdgeInsets.only(left: 10),

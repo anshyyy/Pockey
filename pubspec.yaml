@@ -39,6 +39,7 @@ dependencies:
   circular_motion: ^0.0.3
   fl_chart: ^0.60.0
   intl: ^0.18.0
+  shared_preferences: ^2.1.0
 
 dev_dependencies:
   flutter_test:

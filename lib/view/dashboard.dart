@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:neubrutalism_ui/neubrutalism_ui.dart';
 import 'package:pockey/view/addGoal.dart';
 import 'package:pockey/widget/tile.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DashBoard extends StatefulWidget {
   List<String> categories;
@@ -12,10 +13,12 @@ class DashBoard extends StatefulWidget {
 }
 
 class _DashBoardState extends State<DashBoard> {
+  final Future<SharedPreferences> prefs = SharedPreferences.getInstance();
   bool press = false;
   int selectedMonthIndex = -1;
   TextEditingController _incomeMoneyController = new TextEditingController();
-  String IncomeMoney = "10000";
+  late Future<String> incomeMoney;
+  late String income = "0";
   List<String> months = [
     "January",
     "Febuary",
@@ -31,11 +34,31 @@ class _DashBoardState extends State<DashBoard> {
     "December"
   ];
 
+  Future<void> getIncome() async {
+    final prefs = await SharedPreferences.getInstance();
+    print('in function');
+    setState(() async {
+      await prefs.setString('incomeMoney', _incomeMoneyController.text);
+      income = (await prefs.getString('incomeMoney'))!;
+      print(income);
+    });
+  }
+
   @override
   void dispose() {
     // ignore: avoid_print
     print('Dispose used');
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    incomeMoney = prefs.then((SharedPreferences prefs) {
+      return prefs.getString('incomeMoney') ?? "0";
+    });
+    //income = incomeMoney as String;
   }
 
   @override
@@ -67,7 +90,7 @@ class _DashBoardState extends State<DashBoard> {
                       Icon(Icons.account_balance_wallet),
                       50,
                       Text(
-                        '₹' + IncomeMoney,
+                        '₹' + income,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                             fontSize: 23,
@@ -253,10 +276,7 @@ class _DashBoardState extends State<DashBoard> {
                                                 Colors.black,
                                                 Colors.black,
                                                 1, () {
-                                              setState(() {
-                                                IncomeMoney =
-                                                    _incomeMoneyController.text;
-                                              });
+                                              getIncome();
                                               Navigator.of(context).pop();
                                             })
                                           ],

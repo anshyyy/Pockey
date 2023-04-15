@@ -6,6 +6,8 @@ import 'package:pockey/view/search.dart';
 import 'package:neubrutalism_ui/neubrutalism_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../widget/dashTile.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -516,6 +518,7 @@ class _HomePageState extends State<HomePage>
                                               1, () {
                                             deductMonetFromIncome(int.parse(
                                                 _expenseController.text));
+                                            DashTile().createState();
                                             Navigator.of(context).pop();
                                           }),
                                         )

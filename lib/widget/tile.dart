@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:shimmer/shimmer.dart';
 
 class Tile extends StatefulWidget {
   final GestureTapCallback onPressed;
@@ -7,7 +8,7 @@ class Tile extends StatefulWidget {
   final double buttonHeight;
   final double buttonWidth;
   final double borderWidth;
-  final Text moneyText;
+  final Shimmer moneyText;
   final Text title;
   final Icon icon;
 

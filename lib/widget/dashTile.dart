@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:neubrutalism_ui/neubrutalism_ui.dart';
 import 'package:pockey/widget/tile.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shimmer/shimmer.dart';
 
 class DashTile extends StatefulWidget {
   const DashTile({super.key});
@@ -12,8 +14,21 @@ class DashTile extends StatefulWidget {
 class _DashTileState extends State<DashTile> {
   bool press = false;
   int selectedMonthIndex = -1;
+  bool _isloading = true;
   TextEditingController _incomeMoneyController = new TextEditingController();
-  String IncomeMoney = "10000";
+  late String incomeMoney = "0";
+  late String income = incomeMoney;
+  Future<void> getIncome() async {
+    final prefs = await SharedPreferences.getInstance();
+    print('in function');
+    setState(() async {
+      await prefs.setString('incomeMoney', _incomeMoneyController.text);
+      print("saved income");
+      income = await prefs.getString('incomeMoney') ?? "0";
+      print(income);
+    });
+  }
+
   List<String> months = [
     "January",
     "Febuary",
@@ -28,6 +43,25 @@ class _DashTileState extends State<DashTile> {
     "November",
     "December"
   ];
+  void loadIncome() async {
+    print("i was called");
+    final prefs = await SharedPreferences.getInstance();
+    incomeMoney = await prefs.getString('incomeMoney') ?? "888";
+    setState(() {
+      income = incomeMoney;
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadIncome();
+    _isloading = true;
+    print(_isloading);
+    //income = incomeMoney as String;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -53,14 +87,24 @@ class _DashTileState extends State<DashTile> {
                     50,
                     Icon(Icons.account_balance_wallet),
                     50,
-                    Text(
-                      '₹' + IncomeMoney,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          fontSize: 23,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    ), () {
+                    !_isloading
+                        ? Shimmer.fromColors(
+                            child: SizedBox(height: 20, width: 40),
+                            baseColor: Colors.grey,
+                            highlightColor: Colors.white)
+                        : Shimmer.fromColors(
+                            period: Duration(seconds: 5),
+                            baseColor: Colors.white,
+                            highlightColor: Colors.red,
+                            child: Text(
+                              '₹' + income,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                  fontSize: 23,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ), () {
                   showModalBottomSheet(
                       isScrollControlled: true,
                       backgroundColor: Colors.amber[100],
@@ -234,10 +278,7 @@ class _DashTileState extends State<DashTile> {
                                               Colors.black,
                                               Colors.black,
                                               1, () {
-                                            setState(() {
-                                              IncomeMoney =
-                                                  _incomeMoneyController.text;
-                                            });
+                                            getIncome();
                                             Navigator.of(context).pop();
                                           })
                                         ],
@@ -267,12 +308,17 @@ class _DashTileState extends State<DashTile> {
                     50,
                     Icon(Icons.account_balance_wallet),
                     50,
-                    Text("₹40,000",
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            fontSize: 23,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white)),
+                    Shimmer.fromColors(
+                      loop: 2,
+                      baseColor: Colors.white,
+                      highlightColor: Colors.grey,
+                      child: Text("₹40,000",
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontSize: 23,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white)),
+                    ),
                     () {},
                     Colors.blueAccent,
                     Text(
@@ -295,12 +341,17 @@ class _DashTileState extends State<DashTile> {
                     50,
                     Icon(Icons.account_balance_wallet),
                     50,
-                    Text("₹30000",
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            fontSize: 23,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white)),
+                    Shimmer.fromColors(
+                      loop: 2,
+                      baseColor: Colors.white,
+                      highlightColor: Colors.black,
+                      child: Text("₹30000",
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontSize: 23,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white)),
+                    ),
                     () {},
                     Colors.blueAccent,
                     Text(
@@ -318,12 +369,17 @@ class _DashTileState extends State<DashTile> {
                     50,
                     Icon(Icons.add_chart),
                     50,
-                    Text("45%",
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            fontSize: 23,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black)),
+                    Shimmer.fromColors(
+                      loop: 2,
+                      baseColor: Colors.black,
+                      highlightColor: Colors.grey,
+                      child: Text("45%",
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontSize: 23,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black)),
+                    ),
                     () {},
                     Colors.amber,
                     Text(

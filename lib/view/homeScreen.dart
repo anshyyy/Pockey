@@ -5,6 +5,7 @@ import 'package:pockey/view/profile.dart';
 import 'package:pockey/view/search.dart';
 import 'package:neubrutalism_ui/neubrutalism_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:pockey/main.dart';
 
 import '../widget/dashTile.dart';
 
@@ -16,7 +17,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, RouteAware {
   late AnimationController _controller;
   TextEditingController _expenseController = TextEditingController();
   bool press = false;
@@ -48,7 +49,7 @@ class _HomePageState extends State<HomePage>
     int leftMoney = int.parse(income) - expense;
     await prefs.setString("incomeMoney", leftMoney.toString());
     setState(() {
-      income = leftMoney.toString();
+      income = leftMoney.toString(); // bug
     });
   }
 
@@ -56,9 +57,41 @@ class _HomePageState extends State<HomePage>
   Widget currentScreen = Analyze(); // here a bug
 
   @override
+  void didPush() {
+    setState(() {});
+    print('HomePage: Called didPush');
+    super.didPush();
+  }
+
+  @override
+  void didPop() {
+    setState(() {});
+    print('HomePage: Called didPop');
+    super.didPop();
+  }
+
+  @override
+  void didPopNext() {
+    setState(() {});
+    print('HomePage: Called didPopNext');
+    super.didPopNext();
+  }
+
+  @override
   void initState() {
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      routeObserver.subscribe(this, ModalRoute.of(context)!);
+    });
+
     super.initState();
     _controller = AnimationController(vsync: this);
+  }
+
+  @override
+  void didPushNext() {
+    setState(() {});
+    print("did push next");
+    super.didPushNext();
   }
 
   @override

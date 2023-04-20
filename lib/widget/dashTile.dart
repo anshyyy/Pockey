@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:neubrutalism_ui/neubrutalism_ui.dart';
+import 'package:pockey/session_manager/session_manager.dart';
 import 'package:pockey/widget/tile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
@@ -19,12 +20,11 @@ class _DashTileState extends State<DashTile> {
   late String incomeMoney = "0";
   late String income = incomeMoney;
   Future<void> getIncome() async {
-    final prefs = await SharedPreferences.getInstance();
     print('in function');
     setState(() async {
-      await prefs.setString('incomeMoney', _incomeMoneyController.text);
+      SessionManager().updateAmountData(_incomeMoneyController.text);
       print("saved income");
-      income = await prefs.getString('incomeMoney') ?? "0";
+      income = (await SessionManager().getAmountData) ?? '888';
       print(income);
     });
   }
@@ -45,8 +45,7 @@ class _DashTileState extends State<DashTile> {
   ];
   void loadIncome() async {
     print("i was called");
-    final prefs = await SharedPreferences.getInstance();
-    incomeMoney = await prefs.getString('incomeMoney') ?? "888";
+    incomeMoney = await SessionManager().getAmountData ?? '888';
     setState(() {
       income = incomeMoney;
     });

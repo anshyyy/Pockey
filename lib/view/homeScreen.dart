@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:neubrutalism_ui/neubrutalism_ui.dart';
+import 'package:pockey/main.dart';
+import 'package:pockey/session_manager/session_manager.dart';
 import 'package:pockey/view/analyze.dart';
 import 'package:pockey/view/dashboard.dart';
 import 'package:pockey/view/profile.dart';
 import 'package:pockey/view/search.dart';
-import 'package:neubrutalism_ui/neubrutalism_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:pockey/main.dart';
 
 import '../widget/dashTile.dart';
 
@@ -43,11 +44,11 @@ class _HomePageState extends State<HomePage>
     "Shopping",
     "groceries"
   ];
+
   void deductMonetFromIncome(int expense) async {
-    final prefs = await SharedPreferences.getInstance();
-    var income = await prefs.getString('incomeMoney') ?? "0";
+    var income = await SessionManager().getAmountData ?? '888';
     int leftMoney = int.parse(income) - expense;
-    await prefs.setString("incomeMoney", leftMoney.toString());
+    await SessionManager().updateAmountData(leftMoney.toString());
     setState(() {
       income = leftMoney.toString(); // bug
     });

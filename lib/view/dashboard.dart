@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:neubrutalism_ui/neubrutalism_ui.dart';
+import 'package:pockey/session_manager/session_manager.dart';
 import 'package:pockey/view/addGoal.dart';
 import 'package:pockey/widget/dashTile.dart';
 import 'package:pockey/widget/tile.dart';
@@ -13,7 +14,7 @@ class DashBoard extends StatefulWidget {
   State<DashBoard> createState() => _DashBoardState();
 }
 
-class _DashBoardState extends State<DashBoard> {
+class _DashBoardState extends State<DashBoard> with RouteAware  {
   final Future<SharedPreferences> prefs = SharedPreferences.getInstance();
   bool press = false;
   int selectedMonthIndex = -1;
@@ -39,17 +40,22 @@ class _DashBoardState extends State<DashBoard> {
     final prefs = await SharedPreferences.getInstance();
     print('in function');
     setState(() async {
-      await prefs.setString('incomeMoney', _incomeMoneyController.text);
+      await SessionManager().updateAmountData(_incomeMoneyController.text);
       print("saved income");
-      income = await prefs.getString('incomeMoney') ?? "0";
+      income = await SessionManager().getAmountData ?? '888';
       print(income);
     });
+  }
+  @override
+  void didPopNext() {
+    loadIncome();
+    print('Dashboard: Called didPopNext');
+    super.didPopNext();
   }
 
   void loadIncome() async {
     print("i was called");
-    final prefs = await SharedPreferences.getInstance();
-    incomeMoney = await prefs.getString('incomeMoney') ?? "888";
+    incomeMoney = await SessionManager().getAmountData ?? '888';
     setState(() {
       income = incomeMoney;
     });

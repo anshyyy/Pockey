@@ -58,47 +58,9 @@ class _HomePageState extends State<HomePage>
   Widget currentScreen = Analyze(); // here a bug
 
   @override
-  void didPush() {
-    setState(() {});
-    print('HomePage: Called didPush');
-    super.didPush();
-  }
-
-  @override
-  void didPop() {
-    setState(() {});
-    print('HomePage: Called didPop');
-    super.didPop();
-  }
-
-  @override
-  void didPopNext() {
-    setState(() {});
-    print('HomePage: Called didPopNext');
-    super.didPopNext();
-  }
-
-  @override
   void initState() {
-    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
-      routeObserver.subscribe(this, ModalRoute.of(context)!);
-    });
-
     super.initState();
     _controller = AnimationController(vsync: this);
-  }
-
-  @override
-  void didPushNext() {
-    setState(() {});
-    print("did push next");
-    super.didPushNext();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 
   @override

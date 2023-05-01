@@ -14,7 +14,7 @@ class DashBoard extends StatefulWidget {
   State<DashBoard> createState() => _DashBoardState();
 }
 
-class _DashBoardState extends State<DashBoard> with RouteAware  {
+class _DashBoardState extends State<DashBoard> with RouteAware {
   final Future<SharedPreferences> prefs = SharedPreferences.getInstance();
   bool press = false;
   int selectedMonthIndex = -1;
@@ -46,6 +46,7 @@ class _DashBoardState extends State<DashBoard> with RouteAware  {
       print(income);
     });
   }
+
   @override
   void didPopNext() {
     loadIncome();
@@ -78,7 +79,9 @@ class _DashBoardState extends State<DashBoard> with RouteAware  {
         child: Container(
           child: Column(
             children: [
-              DashTile(),
+              DashTile(
+                callback: () {},
+              ),
               SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.only(left: 10, right: 10),

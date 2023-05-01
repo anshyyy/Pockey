@@ -97,7 +97,6 @@ class _HomePageState extends State<HomePage>
               tooltip: "Open Notifications",
             )
           ]),
-      floatingActionButton: AddButtom(expenseController: _expenseController),
       body: PageStorage(bucket: bucket, child: currentScreen),
       bottomNavigationBar: BottomAppBar(
         color: Colors.amber[100],

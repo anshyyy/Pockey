@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:neubrutalism_ui/neubrutalism_ui.dart';
-import 'package:pockey/session_manager/session_manager.dart';
 import 'package:pockey/widget/tile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
@@ -15,16 +14,20 @@ class DashTile extends StatefulWidget {
 class _DashTileState extends State<DashTile> {
   bool press = false;
   int selectedMonthIndex = -1;
+  final Function callback;
   bool _isloading = true;
   TextEditingController _incomeMoneyController = new TextEditingController();
   late String incomeMoney = "0";
   late String income = incomeMoney;
+
+  _DashTileState(this.callback);
   Future<void> getIncome() async {
+    final prefs = await SharedPreferences.getInstance();
     print('in function');
     setState(() async {
-      SessionManager().updateAmountData(_incomeMoneyController.text);
+      await prefs.setString('incomeMoney', _incomeMoneyController.text);
       print("saved income");
-      income = (await SessionManager().getAmountData) ?? '888';
+      income = await prefs.getString('incomeMoney') ?? "0";
       print(income);
     });
   }
@@ -45,7 +48,8 @@ class _DashTileState extends State<DashTile> {
   ];
   void loadIncome() async {
     print("i was called");
-    incomeMoney = await SessionManager().getAmountData ?? '888';
+    final prefs = await SharedPreferences.getInstance();
+    incomeMoney = await prefs.getString('incomeMoney') ?? "888";
     setState(() {
       income = incomeMoney;
     });

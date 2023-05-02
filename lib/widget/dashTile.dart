@@ -22,19 +22,19 @@ class _DashTileState extends State<DashTile> {
   TextEditingController _expenseController = new TextEditingController();
   late String incomeMoney = "0";
   late String income = incomeMoney;
-  late String expense = '0';
+  late String expense = "0";
+  String balance = "0";
 
-  Future<void> getIncome() async {
-    final prefs = await SharedPreferences.getInstance();
-    print('in function');
-    setState(() async {
-      await prefs.setString('incomeMoney', _incomeMoneyController.text);
-      await prefs.setString('expenseMoney', '0');
-      print("saved income");
-      income = await prefs.getString('incomeMoney') ?? "0";
-      print(income);
-    });
-  }
+  // Future<void> getIncome() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   print('in function');
+  //   setState(() async {
+  //     await prefs.setString('incomeMoney', _incomeMoneyController.text);
+  //     print("saved income");
+  //     income = await prefs.getString('incomeMoney') ?? "0";
+  //     print(income);
+  //   });
+  // }
 
   final List<Color> color = [
     Colors.red,
@@ -68,22 +68,77 @@ class _DashTileState extends State<DashTile> {
   void loadIncome() async {
     print("i was called");
     final prefs = await SharedPreferences.getInstance();
-    incomeMoney = await prefs.getString('incomeMoney') ?? "888";
-    setState(() {
+    incomeMoney = await prefs.getString('incomeMoney') ?? "0";
+    String exp = await prefs.getString('expense') ?? '0';
+    int remaining = (int.parse(incomeMoney) - int.parse(exp));
+    print("here is the balance");
+    print(remaining);
+    String bal = "0";
+    if (remaining >= 0) {
+      bal = remaining.toString();
+    }
+    if (remaining < 0) {
+      bal = "0";
+    }
+    print(bal);
+    setState(() async {
       income = incomeMoney;
+      expense = exp;
+      balance = bal;
     });
   }
 
-  void deductMonetFromIncome(String exp) async {
+  void resetIncomeOnDay1ofmonths() async {
     final prefs = await SharedPreferences.getInstance();
-    var expenseOld = await prefs.getString('expenseMoney');
-    int e = int.parse(exp) + int.parse(expenseOld!);
+    var date = DateTime.now();
+    var newDate =
+        DateTime(date.year, date.month - 1, date.day).toString().split("")[0];
+    int today = int.parse(newDate);
+    print("sadsadas");
+    print(newDate);
+    bool flag = true;
+    if (today == 1) {
+      await prefs.setString('incomeMoney', '0');
+      await prefs.setString('expense', "0");
+      setState(() {
+        income = "0";
+        expense = '0';
+      });
+    }
+    if (today != 1) {
+      String money = _incomeMoneyController.text;
+      String? oldIncome = await prefs.getString('incomeMoney');
+      String newIncome = (int.parse(money) + int.parse(oldIncome!)).toString();
+      await prefs.setString('incomeMoney', newIncome);
+      setState(() {
+        income = newIncome;
+      });
+    }
+  }
 
-    print('in function');
-    setState(() async {
-      print("saved expense");
-      expense = await prefs.getString('expenseMoney') ?? "0";
-      print(income);
+  // void saveExpensesAndDeductitonDay1() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   String recentExpense = _expenseController.text;
+  //   String? oldExpense = await prefs.getString('expense');
+  //   String newExpense =
+  //       (int.parse(recentExpense) + int.parse(oldExpense!)).toString();
+  //   await prefs.setString('expense', newExpense);
+  //   setState(() {
+  //     expense = newExpense;
+  //   });
+  // }
+
+  void addExpense(String exp) async {
+    final prefs = await SharedPreferences.getInstance();
+    String recentExpense = exp;
+    String? oldExpense = await prefs.getString('expense') ?? "0";
+    print(recentExpense);
+    print(oldExpense);
+    String newExpense =
+        (int.parse(recentExpense) + int.parse(oldExpense)).toString();
+    await prefs.setString('expense', newExpense);
+    setState(() {
+      expense = newExpense;
     });
   }
 
@@ -92,6 +147,8 @@ class _DashTileState extends State<DashTile> {
     // TODO: implement initState
     super.initState();
     loadIncome();
+    resetIncomeOnDay1ofmonths();
+    //saveExpensesAndDeductitonDay1();
     _isloading = true;
     print(_isloading);
     //income = incomeMoney as String;
@@ -313,7 +370,9 @@ class _DashTileState extends State<DashTile> {
                                               Colors.black,
                                               Colors.black,
                                               1, () {
-                                            getIncome();
+                                            // getIncome();
+                                            resetIncomeOnDay1ofmonths();
+                                            loadIncome();
                                             Navigator.of(context).pop();
                                           })
                                         ],
@@ -347,7 +406,7 @@ class _DashTileState extends State<DashTile> {
                       loop: 2,
                       baseColor: Colors.white,
                       highlightColor: Colors.grey,
-                      child: Text("₹40,000",
+                      child: Text("₹" + expense,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                               fontSize: 23,
@@ -380,7 +439,7 @@ class _DashTileState extends State<DashTile> {
                       loop: 2,
                       baseColor: Colors.white,
                       highlightColor: Colors.black,
-                      child: Text("₹30000",
+                      child: Text("₹" + balance,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                               fontSize: 23,
@@ -824,8 +883,9 @@ class _DashTileState extends State<DashTile> {
                                                 Colors.black,
                                                 Colors.black,
                                                 1, () {
-                                              deductMonetFromIncome(
+                                              addExpense(
                                                   _expenseController.text);
+                                              loadIncome();
                                               Navigator.of(context).pop();
                                             }),
                                           )
@@ -838,11 +898,21 @@ class _DashTileState extends State<DashTile> {
                         );
                       });
                     });
-                getIncome();
               },
               child: Padding(
                 padding: const EdgeInsets.only(left: 0.0, right: 0),
                 child: Container(
+                  child: Center(
+                    child: Text(
+                      "Add Your New Expense",
+                      style: TextStyle(
+                        fontSize: 30,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Bebas',
+                      ),
+                    ),
+                  ),
                   height: 60,
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(

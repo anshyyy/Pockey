@@ -84,7 +84,7 @@ class _DashBoardState extends State<DashBoard> with RouteAware {
               ),
               SizedBox(height: 20),
               Padding(
-                padding: const EdgeInsets.only(left: 10, right: 10),
+                padding: const EdgeInsets.only(left: 20, right: 20),
                 child: Container(
                   height: 65,
                   padding: const EdgeInsets.only(left: 10, right: 10),

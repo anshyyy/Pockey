@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:neubrutalism_ui/neubrutalism_ui.dart';
-import 'package:pockey/view/addButtonWidget.dart';
+import 'package:pockey/widget/addButtonWidget.dart';
 import 'package:pockey/widget/tile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:neubrutalism_ui/neubrutalism_ui.dart';
 import 'package:pockey/main.dart';
-import 'package:pockey/session_manager/session_manager.dart';
-import 'package:pockey/view/addButtonWidget.dart';
+import 'package:pockey/widget/addButtonWidget.dart';
 import 'package:pockey/view/analyze.dart';
 import 'package:pockey/view/dashboard.dart';
 import 'package:pockey/view/profile.dart';
@@ -45,15 +44,6 @@ class _HomePageState extends State<HomePage>
     "Shopping",
     "groceries"
   ];
-
-  void deductMonetFromIncome(int expense) async {
-    var income = await SessionManager().getAmountData ?? '888';
-    int leftMoney = int.parse(income) - expense;
-    await SessionManager().updateAmountData(leftMoney.toString());
-    setState(() {
-      income = leftMoney.toString(); // bug
-    });
-  }
 
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreen = Analyze(); // here a bug

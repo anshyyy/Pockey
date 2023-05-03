@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:neubrutalism_ui/neubrutalism_ui.dart';
-import 'package:pockey/session_manager/session_manager.dart';
 import 'package:pockey/view/addGoal.dart';
 import 'package:pockey/widget/dashTile.dart';
 import 'package:pockey/widget/tile.dart';
@@ -36,37 +35,10 @@ class _DashBoardState extends State<DashBoard> with RouteAware {
     "December"
   ];
 
-  Future<void> getIncome() async {
-    final prefs = await SharedPreferences.getInstance();
-    print('in function');
-    setState(() async {
-      await SessionManager().updateAmountData(_incomeMoneyController.text);
-      print("saved income");
-      income = await SessionManager().getAmountData ?? '888';
-      print(income);
-    });
-  }
-
-  @override
-  void didPopNext() {
-    loadIncome();
-    print('Dashboard: Called didPopNext');
-    super.didPopNext();
-  }
-
-  void loadIncome() async {
-    print("i was called");
-    incomeMoney = await SessionManager().getAmountData ?? '888';
-    setState(() {
-      income = incomeMoney;
-    });
-  }
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    loadIncome();
     //income = incomeMoney as String;
   }
 

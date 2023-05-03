@@ -3,6 +3,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:pockey/view/search.dart';
 import 'package:pockey/widget/MonthlyBarGraph.dart';
 import 'package:pockey/widget/pieChart.dart';
+import '../constants/colors.dart';
 import '../widget/dashTile.dart';
 
 class Analyze extends StatefulWidget {
@@ -18,7 +19,7 @@ class _AnalyzeState extends State<Analyze> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     TabController _tabController = TabController(length: 3, vsync: this);
     return Scaffold(
-      backgroundColor: Colors.amber[100],
+      backgroundColor: new Color(0xffEAEAEA),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(left: 5, right: 5),

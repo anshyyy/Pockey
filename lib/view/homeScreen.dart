@@ -8,6 +8,7 @@ import 'package:pockey/view/profile.dart';
 import 'package:pockey/view/search.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../constants/colors.dart';
 import '../widget/dashTile.dart';
 
 class HomePage extends StatefulWidget {
@@ -67,21 +68,21 @@ class _HomePageState extends State<HomePage>
               height: 3,
             ),
           ),
-          backgroundColor: Colors.amber[100],
+          backgroundColor: kwhite,
           centerTitle: true,
           leading: IconButton(
             onPressed: () {},
             icon: Icon(Icons.dehaze),
-            color: Colors.black87,
+            color: kblack,
             tooltip: "Settings",
           ),
           title: Text(
             screens[currentTab],
-            style: TextStyle(color: Colors.black87),
+            style: TextStyle(color: kblack),
           ),
           actions: [
             IconButton(
-              color: Colors.black87,
+              color: kblack,
               onPressed: () {},
               icon: Icon(Icons.notifications),
               tooltip: "Open Notifications",
@@ -89,7 +90,7 @@ class _HomePageState extends State<HomePage>
           ]),
       body: PageStorage(bucket: bucket, child: currentScreen),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.amber[100],
+        color: kwhite,
         shape: CircularNotchedRectangle(),
         notchMargin: 10,
         child: Container(
@@ -112,12 +113,11 @@ class _HomePageState extends State<HomePage>
                   children: [
                     Icon(
                       Icons.home,
-                      color: currentTab == 0 ? Colors.black : Colors.grey,
+                      color: currentTab == 0 ? kpurple : Colors.grey,
                     ),
                     Text("Home",
                         style: TextStyle(
-                            color:
-                                currentTab == 0 ? Colors.black : Colors.grey))
+                            color: currentTab == 0 ? kpurple : Colors.grey))
                   ],
                 ),
               ),
@@ -134,12 +134,11 @@ class _HomePageState extends State<HomePage>
                   children: [
                     Icon(
                       Icons.analytics,
-                      color: currentTab == 1 ? Colors.black : Colors.grey,
+                      color: currentTab == 1 ? kpurple : Colors.grey,
                     ),
                     Text("Analyze",
                         style: TextStyle(
-                            color:
-                                currentTab == 1 ? Colors.black : Colors.grey))
+                            color: currentTab == 1 ? kpurple : Colors.grey))
                   ],
                 ),
               ),
@@ -156,12 +155,11 @@ class _HomePageState extends State<HomePage>
                   children: [
                     Icon(
                       Icons.search_off_rounded,
-                      color: currentTab == 2 ? Colors.black : Colors.grey,
+                      color: currentTab == 2 ? kpurple : Colors.grey,
                     ),
                     Text("Search",
                         style: TextStyle(
-                            color:
-                                currentTab == 2 ? Colors.black : Colors.grey))
+                            color: currentTab == 2 ? kpurple : Colors.grey))
                   ],
                 ),
               ),
@@ -178,12 +176,11 @@ class _HomePageState extends State<HomePage>
                   children: [
                     Icon(
                       Icons.person,
-                      color: currentTab == 3 ? Colors.black : Colors.grey,
+                      color: currentTab == 3 ? kpurple : Colors.grey,
                     ),
                     Text("Profile",
                         style: TextStyle(
-                            color:
-                                currentTab == 3 ? Colors.black : Colors.grey))
+                            color: currentTab == 3 ? kpurple : Colors.grey))
                   ],
                 ),
               )

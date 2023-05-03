@@ -25,7 +25,7 @@ class _RecentExpenseWidgetState extends State<RecentExpenseWidget> {
           ),
           ListView.builder(
             shrinkWrap: true,
-            physics: ClampingScrollPhysics(),
+            physics: NeverScrollableScrollPhysics(),
             itemCount: widget.exp.length,
             itemBuilder: (BuildContext context, int index) {
               Map<String, dynamic> item = widget.exp[index];

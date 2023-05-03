@@ -113,11 +113,11 @@ class _HomePageState extends State<HomePage>
                   children: [
                     Icon(
                       Icons.home,
-                      color: currentTab == 0 ? kpurple : Colors.grey,
+                      color: currentTab == 0 ? kblack : Colors.grey,
                     ),
                     Text("Home",
                         style: TextStyle(
-                            color: currentTab == 0 ? kpurple : Colors.grey))
+                            color: currentTab == 0 ? kblack : Colors.grey))
                   ],
                 ),
               ),
@@ -134,11 +134,11 @@ class _HomePageState extends State<HomePage>
                   children: [
                     Icon(
                       Icons.analytics,
-                      color: currentTab == 1 ? kpurple : Colors.grey,
+                      color: currentTab == 1 ? kblack : Colors.grey,
                     ),
                     Text("Analyze",
                         style: TextStyle(
-                            color: currentTab == 1 ? kpurple : Colors.grey))
+                            color: currentTab == 1 ? kblack : Colors.grey))
                   ],
                 ),
               ),
@@ -155,11 +155,11 @@ class _HomePageState extends State<HomePage>
                   children: [
                     Icon(
                       Icons.search_off_rounded,
-                      color: currentTab == 2 ? kpurple : Colors.grey,
+                      color: currentTab == 2 ? kblack : Colors.grey,
                     ),
                     Text("Search",
                         style: TextStyle(
-                            color: currentTab == 2 ? kpurple : Colors.grey))
+                            color: currentTab == 2 ? kblack : Colors.grey))
                   ],
                 ),
               ),
@@ -176,11 +176,11 @@ class _HomePageState extends State<HomePage>
                   children: [
                     Icon(
                       Icons.person,
-                      color: currentTab == 3 ? kpurple : Colors.grey,
+                      color: currentTab == 3 ? kblack : Colors.grey,
                     ),
                     Text("Profile",
                         style: TextStyle(
-                            color: currentTab == 3 ? kpurple : Colors.grey))
+                            color: currentTab == 3 ? kblack : Colors.grey))
                   ],
                 ),
               )

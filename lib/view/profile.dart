@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:pockey/view/profileForm.dart';
 
+import '../constants/colors.dart';
+
 class Profile extends StatelessWidget {
   const Profile({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.amber[100],
+        backgroundColor: kwhite,
         body: Padding(
           padding: const EdgeInsets.all(5),
           child: Column(

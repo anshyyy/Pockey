@@ -204,7 +204,7 @@ class _DashBoardState extends State<DashBoard> with RouteAware {
                                     ), () {
                             showModalBottomSheet(
                                 isScrollControlled: true,
-                                backgroundColor: Colors.amber[100],
+                                backgroundColor: kwhite,
                                 context: context,
                                 builder: (BuildContext context) {
                                   return StatefulBuilder(builder:
@@ -613,37 +613,36 @@ class _DashBoardState extends State<DashBoard> with RouteAware {
                         shrinkWrap: true,
                         scrollDirection: Axis.vertical,
                         itemCount: expenseData.length,
+                        physics: NeverScrollableScrollPhysics(),
                         itemBuilder: (BuildContext context, int index) {
                           return Stack(
                             children: <Widget>[
                               Padding(
                                 padding: const EdgeInsets.only(left: 50.0),
-                                child: new Card(
+                                child: Card(
                                   margin: const EdgeInsets.all(20.0),
-                                  child: Expanded(
-                                    child: Container(
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(3),
-                                            border: Border.all(
+                                  child: Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(3),
+                                          border: Border.all(
+                                            color: Colors.black,
+                                            width: 1,
+                                          ),
+                                          boxShadow: [
+                                            BoxShadow(
                                               color: Colors.black,
-                                              width: 1,
+                                              blurRadius: 0,
+                                              offset: Offset(4, 4),
                                             ),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black,
-                                                blurRadius: 0,
-                                                offset: Offset(4, 4),
-                                              ),
-                                            ],
-                                            color: Colors.white),
-                                        child: RecentExpenseWidget(
-                                          date:
-                                              expenseData.keys.elementAt(index),
-                                          exp: expenseData.values
-                                              .elementAt(index),
-                                        )),
-                                  ),
+                                          ],
+                                          color: Colors.white),
+                                      child: RecentExpenseWidget(
+                                        date: expenseData.keys.elementAt(
+                                            expenseData.length - index - 1),
+                                        exp: expenseData.values.elementAt(
+                                            expenseData.length - index - 1),
+                                      )),
                                 ),
                               ),
                               Positioned(
@@ -657,12 +656,12 @@ class _DashBoardState extends State<DashBoard> with RouteAware {
                                 ),
                               ),
                               Positioned(
-                                top: 100.0,
+                                top: 70.0,
                                 left: 26.0,
                                 child: Container(
                                   height: 20.0,
                                   width: 20.0,
-                                  decoration: new BoxDecoration(
+                                  decoration: const BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: Colors.white,
                                   ),

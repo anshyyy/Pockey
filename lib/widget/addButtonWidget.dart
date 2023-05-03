@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'package:neubrutalism_ui/neubrutalism_ui.dart';
 
+import '../constants/colors.dart';
 import '../data/categories.dart';
 import '../data/expenseData.dart';
 
@@ -48,6 +49,7 @@ class _AddButtonState extends State<AddButton> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Add expense"),
+        backgroundColor: kwhite,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -242,7 +244,7 @@ class _AddButtonState extends State<AddButton> {
                                       1, () {
                                     showModalBottomSheet(
                                         isScrollControlled: true,
-                                        backgroundColor: Colors.amber[100],
+                                        backgroundColor: kwhite,
                                         context: context,
                                         builder: (BuildContext context) {
                                           return Padding(

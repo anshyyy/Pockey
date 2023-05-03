@@ -3,6 +3,8 @@ import "package:flutter/material.dart";
 import "package:neubrutalism_ui/neubrutalism_ui.dart";
 import 'dart:math';
 
+import "../constants/colors.dart";
+
 class AddGoal extends StatefulWidget {
   List<String> categories;
   AddGoal({super.key, required this.categories});
@@ -29,12 +31,12 @@ class _AddGoalState extends State<AddGoal> {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.amber[100],
+        backgroundColor: kwhite,
         appBar: AppBar(
           iconTheme: IconThemeData(
             color: Colors.black, //change your color here
           ),
-          backgroundColor: Colors.amber[100],
+          backgroundColor: kwhite,
           title: const Text(
             "Add Goal",
             style: TextStyle(color: Colors.black),

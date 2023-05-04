@@ -5,6 +5,8 @@ import 'package:pockey/widget/tile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../constants/colors.dart';
+
 class DashTile extends StatefulWidget {
   final Function callback;
 
@@ -199,7 +201,7 @@ class _DashTileState extends State<DashTile> {
                           ), () {
                   showModalBottomSheet(
                       isScrollControlled: true,
-                      backgroundColor: Colors.amber[100],
+                      backgroundColor: kwhite,
                       context: context,
                       builder: (BuildContext context) {
                         return StatefulBuilder(builder:
